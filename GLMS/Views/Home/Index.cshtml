@@ -1,0 +1,77 @@
+﻿@{
+    ViewData["Title"] = "Welcome";
+}
+
+<div class="text-center py-4 mb-4">
+    <h1 class="display-4">Global Logistics Management System</h1>
+    <p class="lead text-muted">
+        A Project for PROG7313 | Portfolio of Evidence Part 2
+    </p>
+    <p class="lead text-muted">
+        By Zachary Handley (ST10435382)
+    </p>
+</div>
+
+<div class="row g-4">
+
+    <div class="col-md-6 col-lg-3">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">Clients</h5>
+                <p class="card-text text-muted flex-grow-1">
+                    Register and manage clients, track contact details
+                    and all associated contracts.
+                </p>
+                <a asp-controller="Clients" asp-action="Index" class="btn btn-outline-primary">
+                    Manage Clients
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-lg-3">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">Contracts</h5>
+                <p class="card-text text-muted flex-grow-1">
+                    Create Freight, SLA, and Warehouse contracts with signed agreement
+                    PDFs. Search by date range and status.
+                </p>
+                <a asp-controller="Contracts" asp-action="Index" class="btn btn-outline-primary">
+                    Manage Contracts
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-lg-3">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">Service Requests</h5>
+                <p class="card-text text-muted flex-grow-1">
+                    Raise service requests on active contracts. Costs auto convert
+                    USD to ZAR using live exchange rates.
+                </p>
+                <a asp-controller="ServiceRequests" asp-action="Index" class="btn btn-outline-primary">
+                    View Requests
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-lg-3">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">Command History</h5>
+                <p class="card-text text-muted flex-grow-1">
+                    Audit log of every approve, reject, and cancel action used on
+                    service requests.
+                </p>
+                <a asp-controller="ServiceRequests" asp-action="History" class="btn btn-outline-primary">
+                    View History
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,60 @@
+@model GLMS.Models.ServiceRequest
+
+@{
+    ViewData["Title"] = "Create Service Request";
+}
+
+<h1>Create Service Request</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div class="form-group mb-3">
+                <label asp-for="ContractId" class="control-label"></label>
+                <select asp-for="ContractId" class="form-select" asp-items="ViewBag.ContractId">
+                    <option value="">-- Select a Contract --</option>
+                </select>
+                <span asp-validation-for="ContractId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Discription" class="control-label"></label>
+                <textarea asp-for="Discription" class="form-control" rows="3"></textarea>
+                <span asp-validation-for="Discription" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="CostUSD" class="control-label"></label>
+                <input asp-for="CostUSD" class="form-control" type="number" step="0.01" min="0.01" />
+                <span asp-validation-for="CostUSD" class="text-danger"></span>
+                <small class="form-text text-muted">
+                    Enter the amount in USD. The system will automatically
+                    convert to ZAR using the current exchange rate.
+                </small>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="WeightTonnes" class="control-label"></label>
+                <input asp-for="WeightTonnes" class="form-control" type="number" step="0.001" min="0" />
+                <span asp-validation-for="WeightTonnes" class="text-danger"></span>
+                <small class="form-text text-muted">
+                    Required only for freight shipments. Leave blank for other contract types. (A more elegant solution is WIP)
+                </small>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
