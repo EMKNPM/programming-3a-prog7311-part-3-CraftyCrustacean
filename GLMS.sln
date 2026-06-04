@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GLMS", "GLMS\GLMS.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GLMS.Tests", "GLMS.Tests\GLMS.Tests.csproj", "{14862C75-A814-4B57-A563-192BB78F249A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GLMS.Api", "GLMS.Api\GLMS.Api.csproj", "{55D95F3F-D6F1-44B0-AD93-9AF251E79BB7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,18 @@ Global
 		{14862C75-A814-4B57-A563-192BB78F249A}.Release|x64.Build.0 = Release|Any CPU
 		{14862C75-A814-4B57-A563-192BB78F249A}.Release|x86.ActiveCfg = Release|Any CPU
 		{14862C75-A814-4B57-A563-192BB78F249A}.Release|x86.Build.0 = Release|Any CPU
+		{55D95F3F-D6F1-44B0-AD93-9AF251E79BB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55D95F3F-D6F1-44B0-AD93-9AF251E79BB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55D95F3F-D6F1-44B0-AD93-9AF251E79BB7}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{55D95F3F-D6F1-44B0-AD93-9AF251E79BB7}.Debug|x64.Build.0 = Debug|Any CPU
+		{55D95F3F-D6F1-44B0-AD93-9AF251E79BB7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{55D95F3F-D6F1-44B0-AD93-9AF251E79BB7}.Debug|x86.Build.0 = Debug|Any CPU
+		{55D95F3F-D6F1-44B0-AD93-9AF251E79BB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55D95F3F-D6F1-44B0-AD93-9AF251E79BB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55D95F3F-D6F1-44B0-AD93-9AF251E79BB7}.Release|x64.ActiveCfg = Release|Any CPU
+		{55D95F3F-D6F1-44B0-AD93-9AF251E79BB7}.Release|x64.Build.0 = Release|Any CPU
+		{55D95F3F-D6F1-44B0-AD93-9AF251E79BB7}.Release|x86.ActiveCfg = Release|Any CPU
+		{55D95F3F-D6F1-44B0-AD93-9AF251E79BB7}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
