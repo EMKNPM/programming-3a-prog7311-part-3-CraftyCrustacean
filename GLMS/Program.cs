@@ -1,7 +1,9 @@
+using GLMS.ApiClient;
 using GLMS.Commands;
 using GLMS.Data;
 using GLMS.Services;
 using Microsoft.EntityFrameworkCore;
+using GLMS.ApiClient;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +21,13 @@ builder.Services.AddHttpClient<ICurrencyExchangeService, CurrencyExchangeService
     client.Timeout = TimeSpan.FromSeconds(5);
 });
 builder.Services.AddScoped<IContractEligibilityService, ContractEligiblilityService>();
+builder.Services.AddHttpClient<IGlmsApiClient, GlmsApiClient>(client =>
+{
+    var apiBase = builder.Configuration["GlmsApi:BaseUrl"]
+                  ?? "https://localhost:7090/";
+    client.BaseAddress = new Uri(apiBase);
+    client.Timeout = TimeSpan.FromSeconds(15);
+});
 
 var app = builder.Build();
 
