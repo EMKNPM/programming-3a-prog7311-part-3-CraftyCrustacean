@@ -1,7 +1,7 @@
-@model IEnumerable<GLMS.Models.ServiceRequest>
+ @model IEnumerable<GLMS.ApiClient.ServiceRequestDto>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Sevice Requests";
 }
 
 <h1>Index</h1>
@@ -12,9 +12,8 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Contract)
-            </th>
+            <th>Contract</th>
+            <th>Client</th>
             <th>
                 @Html.DisplayNameFor(model => model.Discription)
             </th>
@@ -40,7 +39,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Contract)
+                @item.ContractServiceLevel
+            </td>
+            <td>
+                @item.ClientName
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Discription)
@@ -61,7 +63,6 @@
                 @Html.DisplayFor(modelItem => item.CreatedDate)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>

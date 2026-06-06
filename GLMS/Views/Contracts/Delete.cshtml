@@ -1,4 +1,4 @@
-@model GLMS.Models.Contract
+@model GLMS.ApiClient.ContractDto
 
 @{
     ViewData["Title"] = "Delete";
@@ -11,12 +11,8 @@
     <h4>Contract</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Client)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Client.ContactDetails)
-        </dd>
+        <dt class="col-sm-2">Client</dt>
+        <dd class="col-sm-10">@Model?.ClientName</dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.StartDate)
         </dt>

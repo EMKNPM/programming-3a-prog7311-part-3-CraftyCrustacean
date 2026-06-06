@@ -1,4 +1,4 @@
-@model GLMS.ViewModels.ContractCreateViewModel
+@model GLMS.ApiClient.CreateContractDto
 
 @{
     ViewData["Title"] = "Create Contract";
@@ -49,9 +49,8 @@
             </div>
 
             <div class="form-group mb-3">
-                <label asp-for="SignedAgreement" class="control-label"></label>
-                <input asp-for="SignedAgreement" type="file" accept="application/pdf" class="form-control" />
-                <span asp-validation-for="SignedAgreement" class="text-danger"></span>
+                <label for="signedAgreement" class="control-label">Signed Agreement (PDF)</label>
+                <input type="file" id="signedAgreement" name="signedAgreement" accept="application/pdf" class="form-control" />
             </div>
 
             <div class="form-group">

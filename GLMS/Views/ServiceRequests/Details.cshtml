@@ -1,4 +1,4 @@
-@model GLMS.Models.ServiceRequest
+@model GLMS.ApiClient.ServiceRequestDto
 
 @{
     ViewData["Title"] = "Details";
@@ -19,12 +19,15 @@
     <h4>ServiceRequest</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Contract)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Contract)
-        </dd>
+<dt class="col-sm-2">Contract</dt>
+<dd class="col-sm-10">
+    <a asp-controller="Contracts" asp-action="Details" asp-route-id="@Model?.ContractId">
+        @Model?.ContractServiceLevel
+    </a>
+</dd>
+
+<dt class="col-sm-2">Client</dt>
+<dd class="col-sm-10">@Model?.ClientName</dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Discription)
         </dt>
@@ -67,7 +70,7 @@
     </p>
 </div>
 <div>
-    @if (Model?.Status == GLMS.Models.ServiceRequestStatus.Pending)
+    @if (Model?.Status == GLMS.ApiClient.ServiceRequestStatus.Pending)
     {
         <div class="card mt-3">
             <div class="card-header">Actions</div>

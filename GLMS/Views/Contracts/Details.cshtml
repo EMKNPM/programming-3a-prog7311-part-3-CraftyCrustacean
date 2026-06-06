@@ -1,4 +1,5 @@
-@model GLMS.Models.Contract
+@model GLMS.ApiClient.ContractDto
+@inject Microsoft.Extensions.Configuration.IConfiguration Config
 
 @{
     ViewData["Title"] = "Details";
@@ -10,12 +11,8 @@
     <h4>Contract</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Client)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Client.ContactDetails)
-        </dd>
+        <dt class="col-sm-2">Client</dt>
+        <dd class="col-sm-10">@Model?.ClientName</dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.StartDate)
         </dt>
@@ -56,14 +53,30 @@
         {
             <dt class="col-sm-2">Signed Agreement</dt>
             <dd class="col-sm-10">
-                <a href="@Model.SignedAgreementFilePath" target="_blank" rel="noopener" download="@Model.SignedAgreementFileName">
-                    Download File: @Model.SignedAgreementFileName
+                <a href="@($"{Config["GlmsApi:BaseUrl"]?.TrimEnd('/')}{Model.SignedAgreementFilePath}")"
+                   target="_blank" rel="noopener" download="@Model.SignedAgreementFileName"> @Model.SignedAgreementFileName
                 </a>
             </dd>
         }
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <div class="card mt-3">
+        <div class="card-header">Change Status</div>
+        <div class="card-body">
+            <form asp-action="UpdateStatus" asp-route-id="@Model?.Id" method="post" class="row g-2">
+                @Html.AntiForgeryToken()
+                <div class="col-auto">
+                    <select name="status" class="form-select"
+                            asp-items="Html.GetEnumSelectList<GLMS.ApiClient.ContractStatus>()">
+                    </select>
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary">Update Status</button>
+                </div>
+            </form>
+            <small class="text-muted">Current status: <strong>@Model?.Status</strong></small>
+        </div>
+    </div>
     <a asp-action="Index">Back to List</a>
 </div>
