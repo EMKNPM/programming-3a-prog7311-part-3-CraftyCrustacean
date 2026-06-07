@@ -5,6 +5,13 @@
     ViewData["Title"] = "Details";
 }
 
+@{
+    var publicApiUrl = Environment.GetEnvironmentVariable("GLMS_API_PUBLIC_URL")
+                       ?? Config["GlmsApi:BaseUrl"]
+                       ?? "https://localhost:7090/";
+    publicApiUrl = publicApiUrl.TrimEnd('/');
+}
+
 <h1>Details</h1>
 
 <div>
@@ -53,8 +60,8 @@
         {
             <dt class="col-sm-2">Signed Agreement</dt>
             <dd class="col-sm-10">
-                <a href="@($"{Config["GlmsApi:BaseUrl"]?.TrimEnd('/')}{Model.SignedAgreementFilePath}")"
-                   target="_blank" rel="noopener" download="@Model.SignedAgreementFileName"> @Model.SignedAgreementFileName
+                <a href="@($"{publicApiUrl}{Model.SignedAgreementFilePath}")" target="_blank" rel="noopener" download="@Model.SignedAgreementFileName">
+                    @Model.SignedAgreementFileName
                 </a>
             </dd>
         }

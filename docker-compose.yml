@@ -1,0 +1,57 @@
+version: '3.8'
+services:
+    db-service:
+        build:
+            context: ./DB
+            dockerfile: Dockerfile
+        container_name: glms-db
+        environment:
+            ACCEPT_EULA: "Y"
+            MSSQL_SA_PASSWORD: "Password1!"
+            MSSQL_PID: "Express"
+        ports:
+            - "1433:1433"
+        volumes:
+            - glms-db-data:/var/opt/mssql
+        restart: always
+        networks:
+            - glms-network
+
+    api-service:
+        build:
+            context: .
+            dockerfile: ./GLMS.Api/Dockerfile
+        container_name: glms-api
+        environment:
+            SQL_CONNECTION_STRING: "Server=glms-db;Database=GLMS_Db;Trusted_Connection=false;MultipleActiveResultSets=true;Encrypt=false;User Id=sa;Password=Password1!"
+        ports:
+            - "8080:8080"
+        volumes:
+            - glms-api-uploads:/app/wwwroot/uploads
+        depends_on:
+            - db-service
+        networks:
+            - glms-network
+
+    mvc-service:
+        build:
+            context: .
+            dockerfile: ./GLMS/Dockerfile
+        container_name: glms-mvc
+        environment:
+            GLMS_API_BASE_URL: "http://api-service:8080/"
+            GLMS_API_PUBLIC_URL: "http://localhost:8080/"
+        ports:
+            - "80:8080"
+        depends_on:
+            - api-service
+        networks:
+            - glms-network
+
+networks:
+    glms-network:
+        driver: bridge
+
+volumes:
+    glms-db-data:
+    glms-api-uploads:

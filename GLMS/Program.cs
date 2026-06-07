@@ -8,7 +8,8 @@ builder.Services.AddControllersWithViews();
 // Tell the app what database to use when the controller asks
 builder.Services.AddHttpClient<IGlmsApiClient, GlmsApiClient>(client =>
 {
-    var apiBase = builder.Configuration["GlmsApi:BaseUrl"]
+    var apiBase = Environment.GetEnvironmentVariable("GLMS_API_BASE_URL")
+                  ?? builder.Configuration["GlmsApi:BaseUrl"]
                   ?? "https://localhost:7090/";
     client.BaseAddress = new Uri(apiBase);
     client.Timeout = TimeSpan.FromSeconds(15);

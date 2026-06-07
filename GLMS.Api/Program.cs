@@ -13,7 +13,11 @@ builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
-builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+var connectionString = Environment.GetEnvironmentVariable("SQL_CONNECTION_STRING")
+                       ?? builder.Configuration.GetConnectionString("DefaultConnection");
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(connectionString));
 builder.Services.AddScoped<IFileStorageService, LocalFileStorageService>();
 builder.Services.AddScoped<IContractEligibilityService, ContractEligiblilityService>();
 builder.Services.AddMemoryCache();
@@ -25,14 +29,35 @@ builder.Services.AddSingleton<RequestInvoker>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+using (var scope = app.Services.CreateScope())
 {
-    app.UseDeveloperExceptionPage();
-    app.UseSwagger();
-    app.UseSwaggerUI();
-    app.MapOpenApi();
+    var db = scope.ServiceProvider.GetRequiredService<GLMS.Data.ApplicationDbContext>();
+    if (db.Database.IsRelational())
+    {
+        int retries = 10;
+        while (retries > 0)
+        {
+            try
+            {
+                db.Database.Migrate();
+                break;
+            }
+            catch (Exception ex) when (retries > 1)
+            {
+                Console.WriteLine($"not ready: {ex.Message}.. retrying in 5s ({retries - 1} left)...");
+                Thread.Sleep(5000);
+                retries--;
+            }
+        }
+    }
 }
+
+// Configure the HTTP request pipeline.
+
+app.UseDeveloperExceptionPage();
+app.UseSwagger();
+app.UseSwaggerUI();
+
 
 app.UseHttpsRedirection();
 
